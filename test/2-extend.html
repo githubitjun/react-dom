@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Animal{
+            constructor(name,age){
+                this.name = name
+                this.age = age
+            }
+
+            eat(food){
+                console.log(`${this.name} 吃 ${food}`)
+            }
+        }    
+
+        class Cat extends Animal{
+            constructor(name,age,color){
+                // 如果子类重写了父类的构造器，那么必须在第一句，调用super
+                super(name,age)
+
+                this.color = color
+            }
+
+            // eat(food){
+            //     console.log(`这是一只猫，它叫 ${this.name} 他喜欢吃 ${food}`)
+            // }
+        }
+
+        // const c1 = new Cat('蓝猫',3)
+        // c1.eat('鱼')
+
+        const c2 = new Cat('黑猫警长',5,'黑色')
+        // console.log(c2)
+        c2.eat('牛排')
+
+    </script>
+</body>
+</html>

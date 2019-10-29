@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button @click="componentName = 'home'">Home</button>
+        <button @click="componentName = 'post'">Posts</button>
+        <button @click="componentName = 'archive'">Archive</button>
+        <!-- <keep-alive> -->
+            <component :is="componentName"/>
+        <!-- </keep-alive> -->
+    </div>
+</body>
+
+<script>
+    // 定义三个组件并且注册
+    Vue.component('home',{
+        template:`
+            <div>
+                Home Component
+            </div>
+        `,
+        data(){
+            return {
+                startTime:0,
+                endTime:0
+            }
+        },
+        created() {
+            this.startTime = (new Date() - 0)
+        },
+        beforeDestroy() {
+            console.log(`---home---beforeDestroy`)
+            this.endTime = (new Date() - 0)
+
+            console.log(this.endTime - this.startTime)
+        },
+        activated(){
+            console.log('---home---activated')
+        },
+        deactivated(){
+            console.log('---home---deactivated')
+        }
+    })
+
+    Vue.component('post',{
+        template:`
+            <div>
+                Posts Component
+            </div>
+        `,
+        beforeDestroy() {
+            console.log(`---post---beforeDestroy`)
+        }
+    })
+
+    Vue.component('archive',{
+        template:`
+            <div>
+                Archive Component
+            </div>
+        `,
+        beforeDestroy() {
+            console.log(`---archive---beforeDestroy`)
+        }
+    })
+
+    new Vue({
+        el:"#app",
+        data:{
+            componentName:'home'
+        }
+    })
+</script>
+</html>

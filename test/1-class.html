@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Animal{
+            // 静态属性
+            static home = '地球'
+
+            // 实例属性
+            color = '黄色'
+            // 当执行了 new Animal() 就会执行 constructor
+            constructor(name,age,color){
+                this.name = name
+                this.age = age
+                if (color) {
+                    this.color = color
+                }
+            }
+
+            // 实例方法  只能访问 实例属性
+            eat(food){
+                console.log(`${this.name} 吃 ${food}`)
+            }
+            
+            // 静态方法 只能访问 静态属性
+            static sleep(){
+                console.log(`所有的动物都睡在 ${this.home} 上`)
+            }
+        }   
+        
+        // console.log(typeof Animal)
+        /**
+        const a1 = new Animal()
+        // console.log(a1,typeof a1)
+        a1.name = "旺财"
+        a1.age = 3
+        a1.xxx = yyy
+
+        console.log(a1)
+
+        const a2 = new Animal()
+        // console.log(a1,typeof a1)
+        a2.name = "阿福"
+        a2.age = 5
+        console.log(a2)
+        **/
+
+        const a1 = new Animal('旺财',3,'土黄')
+        const a2 = new Animal('阿福',5,'黑色')
+        const a3 = new Animal()
+        // console.log(a1,a2,a3)
+        // console.log(Animal.home)
+
+        a1.eat('骨头')
+        a2.eat('高级狗粮')
+
+        Animal.sleep()
+    </script>
+</body>
+</html>

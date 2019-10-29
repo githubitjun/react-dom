@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-i18n/dist/vue-i18n.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{ $t("message.hello") }}</p>
+        <p>{{ $t("message.jiayou") }}</p>
+        <button @click="$i18n.locale = 'ja'">日语</button>
+        <button @click="$i18n.locale = 'en'">English</button>
+        <button @click="$i18n.locale = 'cn'">中文</button>
+
+        <img v-bind:src="img_url" alt="">
+        <!-- <span>{{b}}</span> -->
+        <span style="color:red;">{{getB}}</span>
+        <button @click="addB">给b动态添加响应式属性</button>
+        <button @click="changeB">测试b</button>
+        <span style="color:green;">{{getAge}}</span>
+        <button @click="obj.age = 222">更改年龄</button>
+      </div>
+</body>
+<script>
+    // 准备翻译的语言环境信息
+    const messages = {
+        en: {
+            message: {
+                hello: 'hello world',
+                jiayou:'come on'
+            }
+        },
+        ja: {
+            message: {
+                hello: 'こんにちは、世界',
+                jiayou:'gang ba de'
+            }
+        },
+        cn:{
+            message:{
+                hello:'你好',
+                jiayou:'加油'
+            }
+        }
+    }
+
+    // 通过选项创建 VueI18n 实例
+    const i18n = new VueI18n({
+        locale: 'cn', // 设置地区
+        messages, // 设置地区信息
+    })
+
+    new Vue({ i18n,data:{
+        img_url:'https://gss1.bdstatic.com/9vo3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=8373eb086263f6241c5d3e05bf7f8cc5/fd039245d688d43ff6f8f1c3741ed21b0ef43ba9.jpg',
+        obj:{
+            age:100
+        }
+    },computed: {
+        getB(){
+            console.log("1111111111111")
+            return this.obj.b
+        },
+        getAge(){
+            return this.obj.age
+        }
+    },methods:{
+        addB(){
+            console.log("---------------")
+            this.$set(this.obj,'b',2)
+        },
+        changeB(){
+            this.obj.b = 222
+        }
+    } }).$mount('#app')
+</script>
+</html>

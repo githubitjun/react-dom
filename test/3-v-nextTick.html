@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <span ref="testRef">{{person && person.name}}</span>
+        <input v-if="isShow" ref="inputRef" type="text"><button @click="add">+</button>
+        <comp1/>
+    </div>
+</body>
+<script>
+    // var comp1 = Vue.extend({
+    //     template:'<div>111</div>'
+    // })
+    var comp1 ={
+        template:'<div>333</div>'
+    }
+
+    Vue.component('comp1',comp1)
+
+    // Vue.component('comp1',{
+    //     template:'<div>我是组件1</div>'
+    // })
+
+    var vm = new Vue({
+        el:"#app",
+        data:{
+            isShow:false,
+            msg:'Hello World',
+            person:null
+        },
+        methods:{
+            add(){
+                console.log("1111111111")
+                // 会把我们该异步更新的操作，放入到队列中，然后继续往下执行
+                this.isShow = true
+
+                // console.log(this.$refs.testRef)
+                
+                /**
+                this.$nextTick(() => {
+                    //console.log(this.$refs.inputRef)
+                    
+                    this.$refs.inputRef.focus()
+                })
+                **/
+            //    Vue.nextTick(() => {
+            //      this.$refs.inputRef.focus()
+            //    })
+                
+                
+                setTimeout(() => {
+                    console.log(this.$refs.inputRef)
+                    this.$refs.inputRef.focus()
+                }, 0);
+            }
+        }
+    })
+</script>
+</html>
